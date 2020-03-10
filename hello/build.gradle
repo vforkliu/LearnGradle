@@ -37,3 +37,17 @@ task printList{
   }
 }
 
+task printMap{
+  doLast{
+    def screenSize = ['w':1024,'h':768]
+    println screenSize.getClass().name
+
+    println 'w:' + screenSize.w
+    println 'h:' + screenSize['h']
+
+    screenSize.each{
+      println "Key:${it.key},Value:${it.value}"
+
+    }
+  }
+}
