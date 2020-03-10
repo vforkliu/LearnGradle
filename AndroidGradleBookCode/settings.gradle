@@ -1,0 +1,3 @@
+rootProject.name="AndroidGradleBookCode"
+include ":example02"
+project(":example02").projectDir=new File(rootDir,'chapter01/example02')
