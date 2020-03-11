@@ -1,5 +1,8 @@
 apply plugin: 'com.android.library'
 
+group = 'com.forkliu'
+version = '0.0.4'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -7,14 +10,19 @@ android {
     defaultConfig {
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName version
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
+
+        buildConfigField "String","VENUS_BASE_VERSION","\"${project.version}\""
     }
 
+
+
     buildTypes {
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -31,3 +39,25 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
+
+ext {
+    GROUP_ID = group
+    ARTIFACT_ID = "venus-base"
+    ARTIFACT_VERSION = version
+
+    DEVELOPER_ID = 'forkliu'
+    DEVELOPER_NAME = 'Liu Jun'
+    DEVELOPER_EMAIL = 'liujun@forkliu.com'
+
+    PROJECT_URL = 'https://github.com/vforkliu/LearnGradle'
+    PROJECT_NAME = 'Venus Base Library'
+    PROJECT_DESC = 'This is a base code library'
+    SCM_URL = 'https://github.com/vforkliu/LearnGradle.git'
+
+    BINTRAY_VERSION_DESC = 'Some small changge'
+    BINTRAY_REPO = 'forkliu'
+    BINTRAY_NAME = ARTIFACT_ID
+}
+
+// apply from: 'bintray-android.gradle'
+apply from: "https://github.com/vforkliu/bintray/raw/master/bintray-android.gradle"

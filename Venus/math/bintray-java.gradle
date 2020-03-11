@@ -1,0 +1,78 @@
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+publishing {
+    publications {
+        mavenPublication(MavenPublication) {
+            from components.java
+
+            groupId project.ext.GROUP_ID
+            artifactId project.ext.ARTIFACT_ID
+            version project.ext.ARTIFACT_VERSION
+
+            pom {
+                name = project.ext.PROJECT_NAME
+                description = project.ext.PROJECT_DESC
+                url = project.ext.PROJECT_URL
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = project.ext.DEVELOPER_ID
+                        name = project.ext.DEVELOPER_NAME
+                        email = project.ext.DEVELOPER_EMAIL
+                    }
+                }
+                scm {
+                    url = project.ext.SCM_URL
+                }
+            }
+        }
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            // change to point to your repo, e.g. http://my.org/repo
+            def releasesRepoUrl = "$buildDir/repos/releases"
+            def snapshotsRepoUrl = "$buildDir/repos/snapshots"
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+        }
+    }
+}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.key")
+    publications = ['mavenPublication']
+    pkg {
+        repo = project.ext.BINTRAY_REPO
+        name = project.ext.BINTRAY_NAME
+        licenses = ['Apache-2.0']
+        vcsUrl = project.ext.SCM_URL
+        version {
+            name = project.ext.ARTIFACT_VERSION
+            desc = project.ext.BINTRAY_VERSION_DESC
+            released  = new Date()
+            gpg {
+                sign = true //Determines whether to GPG sign the files. The default is false
+                passphrase = properties.getProperty("bintray.gpg.password")
+                //Optional. The passphrase for GPG signing'
+            }
+        }
+    }
+
+}

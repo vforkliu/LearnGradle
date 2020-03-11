@@ -1,0 +1,35 @@
+apply plugin: 'java-library'
+//apply plugin: 'maven-publish'
+//apply plugin: 'com.jfrog.bintray'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"
+
+version = "0.0.9"
+ext {
+    GROUP_ID = 'com.forkliu'
+    ARTIFACT_ID = "venus-math"
+    ARTIFACT_VERSION = version
+
+    DEVELOPER_ID = 'forkliu'
+    DEVELOPER_NAME = 'Liu Jun'
+    DEVELOPER_EMAIL = 'liujun@forkliu.com'
+
+    PROJECT_URL = 'https://github.com/vforkliu/LearnGradle'
+    PROJECT_NAME = 'Venus Math Library'
+    PROJECT_DESC = 'This is a simple math library'
+    SCM_URL = 'https://github.com/vforkliu/LearnGradle.git'
+
+    BINTRAY_VERSION_DESC = 'Some small change'
+    BINTRAY_REPO = 'forkliu'
+    BINTRAY_NAME = ARTIFACT_ID
+}
+
+apply from: "https://github.com/vforkliu/bintray/raw/master/bintray-java.gradle"
+
+
