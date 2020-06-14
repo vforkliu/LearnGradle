@@ -1,16 +1,16 @@
 apply plugin: 'com.android.library'
 
 group = 'com.forkliu'
-version = '0.0.5'
+version = '0.0.6'
 
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        minSdkVersion 23
+        minSdkVersion 19
         targetSdkVersion 29
-        versionCode 5
+        versionCode 6
         versionName version
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -57,7 +57,7 @@ ext {
     PROJECT_DESC = 'This is a base code library'
     SCM_URL = 'https://github.com/vforkliu/LearnGradle.git'
 
-    BINTRAY_VERSION_DESC = 'Logger rotating by size or time'
+    BINTRAY_VERSION_DESC = 'minSdkVersion 19'
     BINTRAY_REPO = 'forkliu'
     BINTRAY_NAME = ARTIFACT_ID
 }
